@@ -14,9 +14,20 @@ app = Flask(__name__)
 # ‘/’ URL is bound with hello_world() function.
 @app.route('/', methods=["POST"])
 def hello_world():
+    print('first' in request.args and 'second' in request.args and 'symbol' in request.args)
     if 'first' in request.args and 'second' in request.args and 'symbol' in request.args:
-        if request.args.get('symbol') in ['+', '-', '/', '*']:
-            st = request.args.get('first') + request.args.get('symbol') + request.args.get('second')
+        print(request.args)
+        if request.args.get('symbol') in ['add', 'sub', 'div', 'mul']:
+            if request.args.get('symbol') == 'add':
+                return str(int(request.args.get('first')) + int(request.args.get('second')))
+            elif request.args.get('symbol') == 'mul':
+                return str(int(request.args.get('first')) * int(request.args.get('second')))
+            elif request.args.get('symbol') == 'sub':
+                return str(int(request.args.get('first')) - int(request.args.get('second')))
+            elif request.args.get('symbol') == 'div':
+                return str(int(request.args.get('first')) / int(request.args.get('second')))
+            else:
+                st = 'unknown exception'
         else:
             st = 'invalid symbol'
     else:
