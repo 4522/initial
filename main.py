@@ -14,7 +14,6 @@ app = Flask(__name__)
 # ‘/’ URL is bound with hello_world() function.
 @app.route('/', methods=["POST"])
 def hello_world():
-    print('first' in request.args and 'second' in request.args and 'symbol' in request.args)
     if 'first' in request.args and 'second' in request.args and 'symbol' in request.args:
         print(request.args)
         if request.args.get('symbol') in ['add', 'sub', 'div', 'mul']:
@@ -39,4 +38,4 @@ def hello_world():
 if __name__ == '__main__':
     # run() method of Flask class runs the application
     # on the local development server.
-    app.run()
+    app.run(debug=True)
